@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CinemaBooking.ConsoleApp/CinemaBooking.ConsoleApp.csproj" Id="3d24d2aa-4125-4817-b072-85369c59abec" />
+    <Project Path="src/CinemaBooking/CinemaBooking.csproj" />
+  </Folder>
+</Solution>
