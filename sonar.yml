@@ -1,0 +1,29 @@
+name: SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Install SonarScanner
+      run: dotnet tool install --global dotnet-sonarscanner
+
+    - name: Begin SonarQube Analysis
+      run: dotnet sonarscanner begin /k:"my-dotnet-48-project" /d:sonar.host.url="http://YOUR_SONARQUBE_URL" /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+    - name: Build Solution
+      run: msbuild YourSolution.sln /t:Rebuild
+
+    - name: End SonarQube Analysis
+      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
